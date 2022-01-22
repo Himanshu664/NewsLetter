@@ -38,6 +38,11 @@ app.post("/", (req, res) => {
   };
 
   const request = https.request(url, options, function (response) {
+    if (response.statusCode === 200) {
+      res.send("Successfully Subscribed");
+    } else {
+      res.send("Error while subscribing try again ");
+    }
     response.on("data", function (data) {
       console.log(JSON.parse(data));
     });
@@ -49,5 +54,3 @@ app.post("/", (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
-
-
